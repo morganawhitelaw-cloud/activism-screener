@@ -75,7 +75,7 @@
             width: 350px;
             height: 300px;
             background: var(--color-taupe);
-            transform: translateZ(100px);
+            transform: translateZ(50px);
             border: 15px solid var(--color-coral);
             border-radius: 20px;
             box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
@@ -86,7 +86,7 @@
             width: 350px;
             height: 300px;
             background: var(--color-coral);
-            transform: translateZ(0px) rotateY(180deg);
+            transform: translateZ(-50px) rotateY(180deg);
             border-radius: 20px;
         }
 
@@ -95,8 +95,7 @@
             width: 100px;
             height: 300px;
             background: linear-gradient(to right, var(--color-coral), #b55842);
-            transform: rotateY(90deg) translateZ(250px) translateX(-50px);
-            border-radius: 20px 0 0 20px;
+            transform: rotateY(90deg) translateZ(175px);
         }
 
         .monitor-right {
@@ -104,8 +103,7 @@
             width: 100px;
             height: 300px;
             background: linear-gradient(to left, var(--color-coral), #b55842);
-            transform: rotateY(-90deg) translateZ(100px) translateX(50px);
-            border-radius: 0 20px 20px 0;
+            transform: rotateY(-90deg) translateZ(175px);
         }
 
         .monitor-top {
@@ -113,8 +111,7 @@
             width: 350px;
             height: 100px;
             background: linear-gradient(to bottom, #e87a62, var(--color-coral));
-            transform: rotateX(90deg) translateZ(200px) translateY(-50px);
-            border-radius: 20px 20px 0 0;
+            transform: rotateX(90deg) translateZ(150px);
         }
 
         .monitor-bottom {
@@ -122,7 +119,7 @@
             width: 350px;
             height: 100px;
             background: var(--color-coral);
-            transform: rotateX(-90deg) translateZ(100px) translateY(50px);
+            transform: rotateX(-90deg) translateZ(150px);
         }
 
         /* Screen */
@@ -175,7 +172,7 @@
             width: 80px;
             height: 60px;
             left: 50%;
-            transform: translateX(-50%) translateY(250px) translateZ(50px);
+            transform: translateX(-50%) translateY(300px) translateZ(0px);
             transform-style: preserve-3d;
         }
 
@@ -207,8 +204,8 @@
             width: 400px;
             height: 120px;
             left: 50%;
-            top: 70%;
-            transform: translateX(-50%) rotateX(80deg) translateZ(-50px);
+            top: 50%;
+            transform: translateX(-50%) translateY(150px) translateZ(200px) rotateX(75deg);
             transform-style: preserve-3d;
         }
 
@@ -259,9 +256,9 @@
             position: absolute;
             width: 180px;
             height: 200px;
-            left: 60%;
+            left: 50%;
             top: 50%;
-            transform: translateX(100px) translateY(-50px) translateZ(-50px);
+            transform: translateX(180px) translateY(50px) translateZ(-30px);
             transform-style: preserve-3d;
         }
 
@@ -271,7 +268,7 @@
             height: 200px;
             background: var(--color-taupe);
             border: 8px solid var(--color-coral);
-            transform: translateZ(120px);
+            transform: translateZ(60px);
             border-radius: 10px;
         }
 
@@ -280,7 +277,7 @@
             width: 180px;
             height: 200px;
             background: var(--color-coral);
-            transform: translateZ(0px) rotateY(180deg);
+            transform: translateZ(-60px) rotateY(180deg);
             border-radius: 10px;
         }
 
@@ -289,8 +286,7 @@
             width: 120px;
             height: 200px;
             background: linear-gradient(to right, #a09f8a, var(--color-taupe));
-            transform: rotateY(90deg) translateZ(60px);
-            border-radius: 10px 0 0 10px;
+            transform: rotateY(90deg) translateZ(90px);
         }
 
         .base-right {
@@ -298,8 +294,7 @@
             width: 120px;
             height: 200px;
             background: linear-gradient(to left, #a09f8a, var(--color-taupe));
-            transform: rotateY(-90deg) translateZ(120px);
-            border-radius: 0 10px 10px 0;
+            transform: rotateY(-90deg) translateZ(90px);
         }
 
         .base-top {
@@ -307,7 +302,7 @@
             width: 180px;
             height: 120px;
             background: linear-gradient(to bottom, var(--color-taupe), #a09f8a);
-            transform: rotateX(90deg) translateZ(0px);
+            transform: rotateX(90deg) translateZ(100px);
             border-radius: 10px 10px 0 0;
         }
 
@@ -316,7 +311,7 @@
             width: 180px;
             height: 120px;
             background: var(--color-coral);
-            transform: rotateX(-90deg) translateZ(200px);
+            transform: rotateX(-90deg) translateZ(100px);
         }
 
         /* Floppy Drive */
@@ -350,6 +345,19 @@
             50%, 99% { opacity: 0.3; }
         }
 
+        /* Desk Surface */
+        .desk {
+            position: absolute;
+            width: 800px;
+            height: 500px;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(100px) translateZ(50px) rotateX(85deg);
+            background: linear-gradient(135deg, var(--color-pink) 0%, var(--color-light) 50%, var(--color-pink) 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
         /* Info text */
         .info {
             position: fixed;
@@ -366,6 +374,9 @@
 <body>
     <div class="scene">
         <div class="computer">
+            <!-- Desk Surface -->
+            <div class="desk"></div>
+
             <!-- Monitor -->
             <div class="monitor">
                 <div class="monitor-body">
