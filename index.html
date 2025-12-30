@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Retro Computer - CSS Only</title>
+    <style>
+        :root {
+            --color-coral: #D26952;
+            --color-teal: #5BBFB3;
+            --color-pink: #E6B8B8;
+            --color-taupe: #B5B5A0;
+            --color-light: #E8E8E8;
+            --color-blue: #7FB3D5;
+            --color-yellow: #F4E5A9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            perspective: 1500px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .scene {
+            width: 600px;
+            height: 600px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotateX(-15deg) rotateY(0deg); }
+            100% { transform: rotateX(-15deg) rotateY(360deg); }
+        }
+
+        .computer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        /* Monitor */
+        .monitor {
+            position: absolute;
+            width: 350px;
+            height: 300px;
+            left: 50%;
+            top: 20%;
+            transform: translateX(-50%) translateZ(0);
+            transform-style: preserve-3d;
+        }
+
+        /* Monitor Body */
+        .monitor-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .monitor-front {
+            position: absolute;
+            width: 350px;
+            height: 300px;
+            background: var(--color-taupe);
+            transform: translateZ(100px);
+            border: 15px solid var(--color-coral);
+            border-radius: 20px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        .monitor-back {
+            position: absolute;
+            width: 350px;
+            height: 300px;
+            background: var(--color-coral);
+            transform: translateZ(0px) rotateY(180deg);
+            border-radius: 20px;
+        }
+
+        .monitor-left {
+            position: absolute;
+            width: 100px;
+            height: 300px;
+            background: linear-gradient(to right, var(--color-coral), #b55842);
+            transform: rotateY(90deg) translateZ(250px) translateX(-50px);
+            border-radius: 20px 0 0 20px;
+        }
+
+        .monitor-right {
+            position: absolute;
+            width: 100px;
+            height: 300px;
+            background: linear-gradient(to left, var(--color-coral), #b55842);
+            transform: rotateY(-90deg) translateZ(100px) translateX(50px);
+            border-radius: 0 20px 20px 0;
+        }
+
+        .monitor-top {
+            position: absolute;
+            width: 350px;
+            height: 100px;
+            background: linear-gradient(to bottom, #e87a62, var(--color-coral));
+            transform: rotateX(90deg) translateZ(200px) translateY(-50px);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .monitor-bottom {
+            position: absolute;
+            width: 350px;
+            height: 100px;
+            background: var(--color-coral);
+            transform: rotateX(-90deg) translateZ(100px) translateY(50px);
+        }
+
+        /* Screen */
+        .screen {
+            position: absolute;
+            width: 280px;
+            height: 210px;
+            top: 30px;
+            left: 35px;
+            background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-blue) 100%);
+            transform: translateZ(1px);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(91, 191, 179, 0.5);
+        }
+
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                transparent 40%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 60%
+            );
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .screen-content {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--color-yellow);
+            font-size: 14px;
+            text-shadow: 0 0 5px var(--color-yellow);
+        }
+
+        /* Monitor Stand */
+        .monitor-stand {
+            position: absolute;
+            width: 80px;
+            height: 60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(250px) translateZ(50px);
+            transform-style: preserve-3d;
+        }
+
+        .stand-neck {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            left: 10px;
+            background: var(--color-coral);
+            transform: translateZ(0);
+            border-radius: 5px;
+        }
+
+        .stand-base {
+            position: absolute;
+            width: 150px;
+            height: 20px;
+            left: -35px;
+            top: 60px;
+            background: linear-gradient(to bottom, var(--color-coral), #b55842);
+            transform: rotateX(90deg) translateZ(-10px);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Keyboard */
+        .keyboard {
+            position: absolute;
+            width: 400px;
+            height: 120px;
+            left: 50%;
+            top: 70%;
+            transform: translateX(-50%) rotateX(80deg) translateZ(-50px);
+            transform-style: preserve-3d;
+        }
+
+        .keyboard-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--color-taupe);
+            border: 5px solid var(--color-coral);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .keyboard-keys {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            display: grid;
+            grid-template-columns: repeat(14, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 4px;
+            transform: translateZ(5px);
+        }
+
+        .key {
+            background: var(--color-light);
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            border: 1px solid var(--color-pink);
+        }
+
+        .key:nth-child(3n) {
+            background: var(--color-pink);
+        }
+
+        .key:nth-child(5n) {
+            background: var(--color-yellow);
+        }
+
+        .key:nth-child(7n) {
+            background: var(--color-blue);
+        }
+
+        /* Computer Base Unit */
+        .base-unit {
+            position: absolute;
+            width: 180px;
+            height: 200px;
+            left: 60%;
+            top: 50%;
+            transform: translateX(100px) translateY(-50px) translateZ(-50px);
+            transform-style: preserve-3d;
+        }
+
+        .base-front {
+            position: absolute;
+            width: 180px;
+            height: 200px;
+            background: var(--color-taupe);
+            border: 8px solid var(--color-coral);
+            transform: translateZ(120px);
+            border-radius: 10px;
+        }
+
+        .base-back {
+            position: absolute;
+            width: 180px;
+            height: 200px;
+            background: var(--color-coral);
+            transform: translateZ(0px) rotateY(180deg);
+            border-radius: 10px;
+        }
+
+        .base-left {
+            position: absolute;
+            width: 120px;
+            height: 200px;
+            background: linear-gradient(to right, #a09f8a, var(--color-taupe));
+            transform: rotateY(90deg) translateZ(60px);
+            border-radius: 10px 0 0 10px;
+        }
+
+        .base-right {
+            position: absolute;
+            width: 120px;
+            height: 200px;
+            background: linear-gradient(to left, #a09f8a, var(--color-taupe));
+            transform: rotateY(-90deg) translateZ(120px);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .base-top {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            background: linear-gradient(to bottom, var(--color-taupe), #a09f8a);
+            transform: rotateX(90deg) translateZ(0px);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .base-bottom {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            background: var(--color-coral);
+            transform: rotateX(-90deg) translateZ(200px);
+        }
+
+        /* Floppy Drive */
+        .floppy-drive {
+            position: absolute;
+            width: 140px;
+            height: 30px;
+            top: 40px;
+            left: 20px;
+            background: #2a2a2a;
+            border: 2px solid var(--color-pink);
+            border-radius: 3px;
+            transform: translateZ(1px);
+        }
+
+        .power-light {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            top: 80px;
+            left: 20px;
+            background: var(--color-teal);
+            border-radius: 50%;
+            transform: translateZ(1px);
+            box-shadow: 0 0 15px var(--color-teal);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49%, 100% { opacity: 1; }
+            50%, 99% { opacity: 0.3; }
+        }
+
+        /* Info text */
+        .info {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--color-teal);
+            font-size: 18px;
+            text-align: center;
+            text-shadow: 0 0 10px var(--color-teal);
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="computer">
+            <!-- Monitor -->
+            <div class="monitor">
+                <div class="monitor-body">
+                    <div class="monitor-front">
+                        <div class="screen">
+                            <div class="screen-content">
+                                > SYSTEM READY_<br>
+                                > LOAD "*",8,1<br>
+                                > RUNNING...<br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="monitor-back"></div>
+                    <div class="monitor-left"></div>
+                    <div class="monitor-right"></div>
+                    <div class="monitor-top"></div>
+                    <div class="monitor-bottom"></div>
+                </div>
+                <div class="monitor-stand">
+                    <div class="stand-neck"></div>
+                    <div class="stand-base"></div>
+                </div>
+            </div>
+
+            <!-- Keyboard -->
+            <div class="keyboard">
+                <div class="keyboard-body">
+                    <div class="keyboard-keys">
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                        <div class="key"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Base Unit / Computer Tower -->
+            <div class="base-unit">
+                <div class="base-front">
+                    <div class="floppy-drive"></div>
+                    <div class="power-light"></div>
+                </div>
+                <div class="base-back"></div>
+                <div class="base-left"></div>
+                <div class="base-right"></div>
+                <div class="base-top"></div>
+                <div class="base-bottom"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info">
+        3D RETRO COMPUTER • CSS ONLY • HOVER TO INTERACT
+    </div>
+</body>
+</html>
